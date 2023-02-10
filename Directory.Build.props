@@ -1,0 +1,27 @@
+<Project>
+    <PropertyGroup>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+        <Deterministic>true</Deterministic>
+        <IsPackable>false</IsPackable>
+        <LangVersion>latest</LangVersion>
+        <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
+        <OutputPath>$(SolutionDir)\bin</OutputPath>
+        <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisLevel>6.0</AnalysisLevel>
+        <AnalysisMode>Recommended</AnalysisMode>
+        <NeutralLanguage>en-US</NeutralLanguage>
+    </PropertyGroup>
+    <PropertyGroup>
+        <Company>kinyuki</Company>
+        <Copyright>kinyuki</Copyright>
+        <InformationalVersion>1.0.0</InformationalVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <InternalsVisibleTo Include="$(AssemblyName).Test" />
+        <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+    </ItemGroup>
+</Project>
