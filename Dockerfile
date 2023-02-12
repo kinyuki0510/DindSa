@@ -3,7 +3,6 @@ EXPOSE 80
 EXPOSE 443
 WORKDIR /root
 
-# Update dnf and utilities
 RUN dnf install -y findutils sudo wget procps procps-ng
 
 COPY dotnet/dotnet-install.sh dotnet-install.sh
@@ -27,10 +26,7 @@ RUN dotnet sln list | grep ".csproj" \
       done;
 RUN ls -alrt
 
-RUN dotnet --list-sdks
 COPY Directory.Build.props ./
-RUN ls -alrt
-
 RUN dotnet restore "DindSa.sln" -p:RestoreUseSkipNonexistentTargets=false
 COPY . .
 
