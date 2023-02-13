@@ -14,7 +14,7 @@
         <AnalysisLevel>6.0</AnalysisLevel>
         <AnalysisMode>Recommended</AnalysisMode>
         <NeutralLanguage>en-US</NeutralLanguage>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
     </PropertyGroup>
     <PropertyGroup>
         <Company>kinyuki</Company>

@@ -4,18 +4,25 @@ EXPOSE 443
 WORKDIR /root
 
 RUN dnf install -y findutils sudo wget procps procps-ng
+RUN dnf module -y enable nodejs:18 && \
+    dnf module -y install nodejs 
 
 COPY dotnet/dotnet-install.sh dotnet-install.sh
 COPY dotnet/after-install.sh after-install.sh
 RUN chmod +x dotnet-install.sh && \
-    bash ./dotnet-install.sh -c 6.0 --install-dir /usr/share/dotnet --runtime aspnetcore && \
+    bash ./dotnet-install.sh --channel 7.0 --install-dir /usr/share/dotnet --runtime aspnetcore && \
     chmod +x after-install.sh && \
     bash ./after-install.sh && \
     echo 'export PATH=$PATH:$DOTNET_ROOT' | tee -a ~/.bashrc && \
     echo 'export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools' >> ~/.bashrc
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
+
+RUN apt-get update
+RUN apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
+RUN apt-get install -y nodejs
 
 COPY *.sln .
 COPY **/*.csproj .
@@ -57,4 +64,4 @@ RUN cd /app && \
 USER $USERNAME
 RUN whoami
 
-ENTRYPOINT ["dotnet", "ConsoleApp.dll"]
+ENTRYPOINT ["dotnet", "Dcas.Api.dll"]
