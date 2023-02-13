@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: dbservier
+    environment:
+      - MSSQL_SA_PASSWORD=<your_strong_password>
+      - ACCEPT_EULA=Y
+      # - MSSQL_PID=<your_product_id> # default: Developer
+      # - MSSQL_PID=Express
+      # - MSSQL_PID=Standard
+      # - MSSQL_PID=Enterprise
+      # - MSSQL_PID=EnterpriseCore
+    ports:
+      - 1433:1433
+    # volumes: # Mounting a volume does not work on Docker for Mac
+    #   - ./mssql/log:/var/opt/mssql/log
+    #   - ./mssql/data:/var/opt/mssql/data
+
+  web:
+    container_name: dindsa
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    env_file: ./development.env
